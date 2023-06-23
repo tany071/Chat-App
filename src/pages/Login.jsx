@@ -19,9 +19,9 @@ const Login = () => {
     }
   }
 
-  const logout = async()=>{
-    await signOut(auth);
-  }
+  // const logout = async()=>{
+  //   await signOut(auth);
+  // }
 
 
 
@@ -35,7 +35,7 @@ const Login = () => {
                 <button onClick={login}>Sign In</button>
             </form>
             <p>Don't have an account? Register</p>
-            <button onClick={logout}>Logout</button>
+            {/* <button onClick={logout}>Logout</button> */}
 
         </div>
     </div>

@@ -37,10 +37,81 @@
         }
   
         button {
-          background-color: blue;
+          background-color: rgb(93, 93, 255);
           color: white;
           padding: 10px;
           font-weight: bold;
           border: none;
           cursor: pointer;
+          border-radius: 5%;
         }
+        .home {
+          background-color: #a7bcff;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+          .container {
+            border: 1px solid white;
+            border-radius: 10px;
+            width: 70%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            @include tablet {
+             width: 90%;
+            }
+          }
+            .navbar {
+              display: flex;
+              align-items: center;
+              background-color: #2f2d52;
+              height: 50px;
+              /* width: 40%; */
+              padding: 8px;
+              justify-content: space-between;
+              color: #ddddf7;
+            }
+            .logo {
+              font-weight: bold;
+              @include tablet {
+                display: none;
+              }
+            }
+            span{
+              margin: 8px;
+            }
+            .sidebar{
+              width: 45%;
+              background-color: #3a4a81;
+              height: 100%;
+            }
+            .userChatInfo {
+              span {
+                font-size: 18px;
+                font-weight: 500;
+              }
+              p {
+                font-size: 14px;
+                color: lightgray;
+              }
+            }
+            .userChat {
+              padding: 10px;
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              color: white;
+              cursor: pointer;
+            }
+      
+              &:hover {
+                background-color: #2f2d52;
+              }
+
+      
+          
+        

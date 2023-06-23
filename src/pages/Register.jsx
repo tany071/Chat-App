@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { storage, auth,db } from "../firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore"; 
+import { auth, db } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import {useNavigate} from "react-router-dom"
 
 const Register = () => {
   const [err, setErr] = useState(false);
   const [name, setName] = useState();
   const [registerEmail, setRegisterEmail] = useState();
   const [registerPassword, setRegisterPassword] = useState();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,27 +23,16 @@ const Register = () => {
         registerPassword
       );
       console.log(user);
-      const storageRef = ref(storage,'name');
-      const uploadTask = uploadBytesResumable(storageRef,File );
-      uploadTask.on(
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
-            await updateProfile(user.user,{
-              name,
-              photoURL:downloadURL
-            })
-            await setDoc(doc(db,"users",user.user.uid),{
-              uid:user.user.uid,
-              name,
-              registerEmail
-            })
-          });
-        }
-      );
+      await setDoc(doc(db, "users", user.user.uid), {
+        name,
+        registerEmail
+      });
+      await setDoc(doc(db, "userChats", user.user.uid), {});
+      navigate("/")
     } catch (error) {
-      // setErr(true);
-      console.log(error.message);
-      console.log(error.code);
+      setErr(true);
+      // console.log(error.message);
+      // console.log(error.code);
     }
   };
 
@@ -51,9 +41,13 @@ const Register = () => {
       <div className="formWrapper">
         <div className="title">Register</div>
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="display name" onChange={(event) => {
+          <input
+            type="text"
+            placeholder="display name"
+            onChange={(event) => {
               setName(event.target.value);
-            }}/>
+            }}
+          />
           <input
             type="email"
             placeholder="email"

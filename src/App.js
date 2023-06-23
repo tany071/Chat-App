@@ -1,12 +1,22 @@
 import './App.css';
+import Home from './pages/Home'
 import Register from './pages/Register';
 import Login from './pages/Login';
 import './style.css';
+import {BrowserRouter,Route,Routes} from "react-router-dom"
    
 function App() {
   return (
-    <Register />
-    // <Login/>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/">
+      <Route index element={<Home/>}/>
+      <Route path="login" element={<Login/>}/>
+      <Route path="register" element={<Register/>}/>
+      </Route>
+    </Routes>
+    </BrowserRouter>
+    
   );
 }
 
